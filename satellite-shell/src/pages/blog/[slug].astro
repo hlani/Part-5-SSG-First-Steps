@@ -1,0 +1,36 @@
+---
+import blogPosts from "../../data/blogPosts.json";
+import { Markdown } from "astro/components";
+
+// Get the blog slug from the URL
+const { slug } = Astro.params;
+
+// Find the corresponding post
+const post = blogPosts.find((p) => p.slug === slug);
+
+if (!post) {
+    throw new Error(`Blog post not found: ${slug}`);
+}
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{post.title}</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <article class="blog-post">
+        <h1>{post.title}</h1>
+        <p><strong>Date:</strong> {post.date}</p>
+        <p>{post.description}</p>
+        <hr>
+        
+        
+        <slot /> <!-- Blog content will be injected here -->
+   
+    </article>
+</body>
+</html>

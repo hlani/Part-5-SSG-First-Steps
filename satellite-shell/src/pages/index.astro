@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+import blogPosts from "../data/blogPosts.json";
+---
+
+<Layout title="Blog">
+  <h1>Blog Posts</h1>
+  <div class="blog-list">
+    {blogPosts.map((post) => (
+      <a href={`/blog/${post.slug}`} class="blog-card">
+        <h2>{post.title}</h2>
+        <p>{post.date}</p>
+        <p>{post.description}</p>
+      </a>
+    ))}
+  </div>
+</Layout>
